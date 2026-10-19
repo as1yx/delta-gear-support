@@ -1,0 +1,20 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1792310842653,
+      "tag": "0000_parched_photon",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1792334834668,
+      "tag": "0001_charming_captain_universe",
+      "breakpoints": true
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+import { readCatalog,writeCatalog } from '../../../lib/catalog-db';
+import { json,readJson,requireApiUser } from '../../../lib/http-api';
+export async function GET(request:Request){const denied=await requireApiUser(request);if(denied)return denied;try{return json(await readCatalog());}catch{return json({error:'商品数据库暂时不可用，请稍后重试。',code:'CATALOG_UNAVAILABLE'},503);}}
+export async function PUT(request:Request){const denied=await requireApiUser(request,true,true);if(denied)return denied;try{const body=await readJson(request);return json(await writeCatalog(body.catalog,body.revision));}catch(error){const code=error instanceof Error?error.message:'';if(code==='CATALOG_CONFLICT')return json({error:'商品已在其他页面更新。请重新加载商品，再应用你的修改。',code},409);return json({error:code==='REQUEST_TOO_LARGE'?'商品目录过大。':'保存失败，请检查数据或稍后重试。',code:'SAVE_FAILED'},400);}}
